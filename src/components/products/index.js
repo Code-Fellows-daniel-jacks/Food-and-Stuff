@@ -1,20 +1,29 @@
-import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-function Products({ active, products }) {
-  const [currentProducts, updateCurrentProducts] = useState(products);
-  console.log(currentProducts);
+import Card from '@mui/material/Card';
+import Button from '@mui/material/Button';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
-  useEffect(() => {
-    if (active === 'all') updateCurrentProducts(products);
-    else updateCurrentProducts(products.filter(product => product.category === active))
-  }, [active]);
+import { addItem } from '../../store/cart.js';
+import { decreaseStock } from '../../store/products.js';
+
+function Products({ allProducts, filteredProducts, addItem, decreaseStock }) {
+  const currentProducts = filteredProducts.length > 0 ? filteredProducts : allProducts;
+
+  function handleAdd(item) {
+    addItem(item);
+    decreaseStock(item.name);
+  }
 
   return (
     <div>
       {currentProducts.map((item, idx) => {
         return (
-          <div key={idx}>{item.name}</div>
+          <Card key={idx}>
+            <h3>{item.name}</h3>
+            <p>In Stock: {item.inventory}</p>
+            <Button onClick={() => handleAdd(item)} color="success" variant="contained"><AddShoppingCartIcon /></Button>
+          </Card>
         )
       })}
     </div>
@@ -23,9 +32,14 @@ function Products({ active, products }) {
 
 const mapStateToProps = (state) => {
   return {
-    products: state.category.allProducts,
-    active: state.category.activeCategory
+    allProducts: state.products.allProducts,
+    filteredProducts: state.products.filteredProducts,
   }
 }
 
-export default connect(mapStateToProps)(Products);
+const mapDispatchToProps = {
+  addItem,
+  decreaseStock,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products);

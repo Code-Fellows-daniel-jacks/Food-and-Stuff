@@ -3,12 +3,18 @@ import { connect } from 'react-redux'; // a function to connect the component to
 import { Button, Drawer } from '@mui/material';
 
 import { changeCategory } from '../../store/categories.js';
+import { updateFiltered } from '../../store/products.js';
 
 function Left({ categories, active, changeCategory }) {
   const [open, toggleOpen] = useState(false);
 
   function toggleDrawer() {
     toggleOpen(!open);
+  }
+
+  function handleClick(category) {
+    changeCategory(category);
+    updateFiltered(category);
   }
 
   const anchor = 'left';
@@ -26,7 +32,7 @@ function Left({ categories, active, changeCategory }) {
           return (
             <div key={category + idx}>
               <h4>{category}</h4>
-              <Button onClick={() => changeCategory(category)}>{category}</Button>
+              <Button onClick={() => handleClick(category)}>{category}</Button>
             </div>
           )
         })}
@@ -44,6 +50,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   changeCategory,
+  updateFiltered,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Left);

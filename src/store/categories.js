@@ -1,15 +1,4 @@
-class Product {
-  constructor(category, name, description, price, inventory) {
-    this.category = category;
-    this.name = name;
-    this.description = description;
-    this.price = price;
-    this.inventory = inventory;
-  }
-}
-
 const initialState = {
-  allProducts: [new Product('food', 'Ramen', 'quick and easy lunch', .89, 500), new Product('stuff', 'Dead Crow', 'keeps good company', 3.00, 100)],
   categories: ['all', 'food', 'stuff'],
   activeCategory: 'all',
 }
