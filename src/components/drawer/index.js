@@ -5,6 +5,8 @@ import { Button, Drawer } from '@mui/material';
 import { changeCategory } from '../../store/categories.js';
 import { updateFiltered } from '../../store/products.js';
 
+import MenuIcon from '@mui/icons-material/Menu';
+
 function Left({ categories, active, changeCategory }) {
   const [open, toggleOpen] = useState(false);
 
@@ -21,7 +23,7 @@ function Left({ categories, active, changeCategory }) {
 
   return (
     <React.Fragment key={anchor}>
-      <Button onClick={toggleDrawer}>{'left'}</Button>
+      <Button onClick={toggleDrawer}><MenuIcon /></Button>
       <Drawer
         anchor={'left'}
         open={open}

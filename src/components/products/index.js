@@ -5,14 +5,12 @@ import Button from '@mui/material/Button';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 import { addItem } from '../../store/cart.js';
-import { decreaseStock } from '../../store/products.js';
 
-function Products({ allProducts, filteredProducts, addItem, decreaseStock }) {
+function Products({ allProducts, filteredProducts, addItem }) {
   const currentProducts = filteredProducts.length > 0 ? filteredProducts : allProducts;
 
   function handleAdd(item) {
     addItem(item);
-    decreaseStock(item.name);
   }
 
   return (
@@ -39,7 +37,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   addItem,
-  decreaseStock,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
