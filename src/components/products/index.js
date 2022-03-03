@@ -1,17 +1,26 @@
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
+import { getProducts } from '../../store/products.js';
 import { addItem } from '../../store/cart.js';
+import { useEffect } from 'react';
 
-function Products({ allProducts, filteredProducts, addItem }) {
+function Products() {
+  const dispatch = useDispatch();
+  const allProducts = useSelector(state => state.products.allProducts);
+  const filteredProducts = useSelector(state => state.products.filteredProducts);
   const currentProducts = filteredProducts.length > 0 ? filteredProducts : allProducts;
 
   function handleAdd(item) {
-    addItem(item);
+    dispatch(addItem(item));
   }
+
+  useEffect(() => {
+    dispatch(getProducts());
+  }, []);
 
   return (
     <div>
@@ -28,15 +37,4 @@ function Products({ allProducts, filteredProducts, addItem }) {
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    allProducts: state.products.allProducts,
-    filteredProducts: state.products.filteredProducts,
-  }
-}
-
-const mapDispatchToProps = {
-  addItem,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Products);
+export default Products;

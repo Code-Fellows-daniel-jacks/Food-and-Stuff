@@ -8,7 +8,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Badge from '@mui/material/Badge';
 
-function CartMenu({ cart, items, removeItem }) {
+function CartMenu({ cart, items, handleRemove }) {
   let [anchorEl, setAnchorEl] = useState(null);
   let open = Boolean(anchorEl);
 
@@ -18,10 +18,6 @@ function CartMenu({ cart, items, removeItem }) {
 
   function handleClose() {
     setAnchorEl(null);
-  }
-
-  function handleRemove(item) {
-    removeItem(item);
   }
 
   let processCart = cart.reduce((prev, curr) => {

@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux'; // a function to connect the component to the store
+import { useDispatch, useSelector } from 'react-redux'; 
 import { Button, Drawer } from '@mui/material';
 
 import { changeCategory } from '../../store/categories.js';
-import { updateFiltered } from '../../store/products.js';
 
 import MenuIcon from '@mui/icons-material/Menu';
 
-function Left({ categories, active, changeCategory }) {
+function Left() {
+
+  const dispatch = useDispatch();
+  const categories = useSelector(state => state.category.categories);
+  const active = useSelector(state => state.category.activeCategory);
+
+
   const [open, toggleOpen] = useState(false);
 
   function toggleDrawer() {
@@ -15,8 +20,7 @@ function Left({ categories, active, changeCategory }) {
   }
 
   function handleClick(category) {
-    changeCategory(category);
-    updateFiltered(category);
+    dispatch(changeCategory(category));
   }
 
   const anchor = 'left';
@@ -43,16 +47,4 @@ function Left({ categories, active, changeCategory }) {
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    categories: state.category.categories,
-    active: state.category.activeCategory,
-  }
-}
-
-const mapDispatchToProps = {
-  changeCategory,
-  updateFiltered,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Left);
+export default Left;

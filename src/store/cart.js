@@ -19,7 +19,6 @@ const cartReducer = (state = initialState, action) => {
 }
 
 export function addItem(item) {
-  console.log(item);
   item.id = nanoid();
   let decoupled = JSON.parse(JSON.stringify(item));
   return {
