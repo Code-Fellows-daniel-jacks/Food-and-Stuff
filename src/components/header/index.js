@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import CartMenu from './cartMenu/cartMenu';
-import { removeItem } from '../../store/cart';
+import { updateProducts } from '../../store/products';
 
 import './header.scss';
 
@@ -11,7 +11,8 @@ function Header() {
   const items = useSelector(state => state.cart.numberOfItems);
 
   function handleRemove(item) {
-    dispatch(removeItem(item));
+    console.log('item passed to remove', item)
+    dispatch(updateProducts(item, 1));
   }
 
   return (

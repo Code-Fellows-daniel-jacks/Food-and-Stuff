@@ -22,10 +22,9 @@ function CartMenu({ cart, items, handleRemove }) {
 
   let processCart = cart.reduce((prev, curr) => {
     if (!prev[curr.name]) {
-      prev[curr.name] = [1, [curr.id]];
+      prev[curr.name] = [curr];
     } else {
-      prev[curr.name][0] += 1;
-      prev[curr.name][1].push(curr.id);
+      prev[curr.name].push(curr);
     }
     return prev;
   }, {});
@@ -55,8 +54,8 @@ function CartMenu({ cart, items, handleRemove }) {
           {displayItems.map((item, idx) => {
             return (
               <MenuItem key={item + idx}>
-                <Badge badgeContent={itemCounts[idx][0]}>{item}</Badge>
-                <Button color="error" onClick={() => handleRemove([item, itemCounts[idx][1].pop()])}>REMOVE</Button>
+                <Badge badgeContent={itemCounts[idx].length}>{item}</Badge>
+                <Button color="error" onClick={() => handleRemove(itemCounts[idx].pop())}>REMOVE</Button>
               </MenuItem>)
           })}
         </When>

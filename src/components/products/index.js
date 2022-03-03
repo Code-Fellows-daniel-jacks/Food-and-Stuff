@@ -6,7 +6,6 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 import { getProducts } from '../../store/products.js';
 import { updateProducts } from '../../store/products.js';
-import { addItem } from '../../store/cart.js';
 import { useEffect } from 'react';
 
 function Products() {
@@ -16,7 +15,6 @@ function Products() {
   const currentProducts = filteredProducts.length > 0 ? filteredProducts : allProducts;
 
   function handleAdd(item) {
-    // dispatch(addItem(item));
     dispatch(updateProducts(item, -1));
   }
 
@@ -29,7 +27,7 @@ function Products() {
       {currentProducts.map((item, idx) => {
         return (
           <Card key={idx}>
-            <h3>{item.name}</h3>
+            <h3 data-testid='title'>{item.name}</h3>
             <p>In Stock: {item.inventory}</p>
             <Button onClick={() => handleAdd(item)} color="success" variant="contained"><AddShoppingCartIcon /></Button>
           </Card>

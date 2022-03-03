@@ -47,10 +47,17 @@ const productReducer = (state = initialState, action) => {
       })
       return { ...state, allProducts: increased }
     case 'GET_PRODUCTS':
-      console.log('got products', payload);
       return { ...state, allProducts: payload }
     case 'UPDATE_PRODUCTS':
-      return { ...state, allProducts: [...state.allProducts, payload] }
+      console.log(payload[0]);
+      let updArr = state.allProducts.map(item => {
+        if (item.name === payload[0].name) {
+          return payload[0]
+        } else {
+          return item
+        };
+      });
+      return { ...state, allProducts: updArr }
     case 'DELETE_PRODUCTS':
       console.log(payload);
       return { ...state, apiProducts: payload }
@@ -72,19 +79,16 @@ export const getProducts = () => async (dispatch, getState) => {
 }
 
 export const updateProducts = (product, value) => async (dispatch, getState) => {
-  let updatedProduct = { ...product };
-  updatedProduct.inventory += value;
-  console.log('PROD BEFORE', updatedProduct);
+  product.inventory += value;
   const response = await axios({
     method: 'put',
     url: `${API_URL}/${product.id}`,
-    body: JSON.stringify(updatedProduct),
+    data: { ...product },
   });
   const data = response.data;
-  console.log('DATAHERE', data);
   dispatch({
     type: 'UPDATE_PRODUCTS',
-    payload: data,
+    payload: [data, value],
   });
 }
 
