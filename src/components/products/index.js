@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 import { getProducts } from '../../store/products.js';
+import { updateProducts } from '../../store/products.js';
 import { addItem } from '../../store/cart.js';
 import { useEffect } from 'react';
 
@@ -15,7 +16,8 @@ function Products() {
   const currentProducts = filteredProducts.length > 0 ? filteredProducts : allProducts;
 
   function handleAdd(item) {
-    dispatch(addItem(item));
+    // dispatch(addItem(item));
+    dispatch(updateProducts(item, -1));
   }
 
   useEffect(() => {

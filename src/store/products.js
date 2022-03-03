@@ -14,15 +14,15 @@ class Product {
   }
 }
 
-const API_URL = 'https://api-js401.herokuapp.com/api/v1/products';
+const API_URL = 'http://localhost:3001/api/v1/product';
 
 const initialState = {
-  allProducts: [
-    new Product('food', 'Ramen', 'quick and easy lunch', .89, 500),
-    new Product('stuff', 'Dead Crow', 'keeps good company', 3.00, 100),
-  ],
+  allProducts: [],
   filteredProducts: [],
-  apiProducts: [],
+
+  // new Product('food', 'Ramen', 'quick and easy lunch', .89, 500),
+  // new Product('stuff', 'Dead Crow', 'keeps good company', 3.00, 100),
+
 }
 
 const productReducer = (state = initialState, action) => {
@@ -47,6 +47,11 @@ const productReducer = (state = initialState, action) => {
       })
       return { ...state, allProducts: increased }
     case 'GET_PRODUCTS':
+      console.log('got products', payload);
+      return { ...state, allProducts: payload }
+    case 'UPDATE_PRODUCTS':
+      return { ...state, allProducts: [...state.allProducts, payload] }
+    case 'DELETE_PRODUCTS':
       console.log(payload);
       return { ...state, apiProducts: payload }
     default:
@@ -55,6 +60,35 @@ const productReducer = (state = initialState, action) => {
 }
 
 export const getProducts = () => async (dispatch, getState) => {
+  const response = await axios({
+    method: 'get',
+    url: API_URL,
+  });
+  const data = response.data;
+  dispatch({
+    type: 'GET_PRODUCTS',
+    payload: data,
+  });
+}
+
+export const updateProducts = (product, value) => async (dispatch, getState) => {
+  let updatedProduct = { ...product };
+  updatedProduct.inventory += value;
+  console.log('PROD BEFORE', updatedProduct);
+  const response = await axios({
+    method: 'put',
+    url: `${API_URL}/${product.id}`,
+    body: JSON.stringify(updatedProduct),
+  });
+  const data = response.data;
+  console.log('DATAHERE', data);
+  dispatch({
+    type: 'UPDATE_PRODUCTS',
+    payload: data,
+  });
+}
+
+export const deleteProducts = () => async (dispatch, getState) => {
   const response = await axios.get(API_URL);
   const data = response.data;
   dispatch({
