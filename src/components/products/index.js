@@ -4,8 +4,9 @@ import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
-import { getProducts } from '../../store/products.js';
-import { updateProducts } from '../../store/products.js';
+import { getProducts } from '../../toolkitStore/products.js';
+import { updateProducts } from '../../toolkitStore/products.js';
+import { updateCart } from '../../toolkitStore/cart.js';
 import { useEffect } from 'react';
 
 function Products() {
@@ -15,7 +16,16 @@ function Products() {
   const currentProducts = filteredProducts.length > 0 ? filteredProducts : allProducts;
 
   function handleAdd(item) {
-    dispatch(updateProducts(item, -1));
+    let value = allProducts.find(product => product.name === item.name).inventory;
+    let updateObj = {
+      name: item.name,
+      goal: 'add',
+      value: value - 1,
+      id: item.id,
+      item: { ...item },
+    }
+    dispatch(updateProducts(updateObj));
+    dispatch(updateCart(updateObj));
   }
 
   useEffect(() => {

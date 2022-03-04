@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'; 
 import { Button, Drawer } from '@mui/material';
 
-import { changeCategory } from '../../store/categories.js';
+import { changeCategory } from '../../toolkitStore/categories.js';
 
 import MenuIcon from '@mui/icons-material/Menu';
 
@@ -11,7 +11,6 @@ function Left() {
   const dispatch = useDispatch();
   const categories = useSelector(state => state.category.categories);
   const active = useSelector(state => state.category.activeCategory);
-
 
   const [open, toggleOpen] = useState(false);
 
