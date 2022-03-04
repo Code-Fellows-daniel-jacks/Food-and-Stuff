@@ -8,13 +8,10 @@ const cartSlice = createSlice({
   },
   reducers: {
     updateCart(state, action) {
-      console.log('called');
-      console.log('payload here', action.payload);
       if (action.payload.goal === 'add') {
         state.cart.push(action.payload.item);
         state.numberOfItems += 1;
       } else if (action.payload.goal === 'minus') {
-        console.log('remove from cart');
         let index = state.cart.indexOf(state.cart.find(item => item.name === action.payload.name));
         state.cart.splice(index, 1);
         state.numberOfItems -= 1;

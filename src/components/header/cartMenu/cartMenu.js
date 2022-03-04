@@ -17,7 +17,6 @@ function CartMenu({ cart, items }) {
 
   const dispatch = useDispatch();
   const allProducts = useSelector(state => state.products.allProducts);
-  console.log('PRODUCTS HERE', allProducts);
 
   function handleRemove(item) {
     let value = allProducts.find(product => product.name === item.name).inventory;
@@ -38,8 +37,6 @@ function CartMenu({ cart, items }) {
   function handleClose() {
     setAnchorEl(null);
   }
-
-  console.log('CART HERE', cart);
 
   let processCart = cart.reduce((prev, curr) => {
     if (!prev[curr.name]) {

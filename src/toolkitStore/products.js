@@ -10,6 +10,12 @@ const productsSlice = createSlice({
     filteredProducts: [],
   },
   reducers: {
+    filteredProducts(state, action) {
+      state.filteredProducts = state.allProducts.filter(product => {
+        console.log(product.category, action.payload);
+        return product.category === action.payload;
+      });
+    },
     makeList(state, action) {
       return { ...state, allProducts: action.payload }
     },
@@ -17,7 +23,6 @@ const productsSlice = createSlice({
       state.allProducts.push(action.payload);
     },
     updateList(state, action) {
-      console.log('action in updateList', action);
       let updArr = state.allProducts.map(item => {
         if (item.name === action.payload.name) {
           return action.payload
@@ -30,7 +35,7 @@ const productsSlice = createSlice({
   },
 });
 
-export const { makeList, addToList, updateList } = productsSlice.actions;
+export const { makeList, addToList, updateList, filteredProducts } = productsSlice.actions;
 
 export const getProducts = () => async dispatch => {
   const response = await axios({
@@ -61,7 +66,6 @@ export const createProducts = (formData) => async dispatch => {
 }
 
 export const updateProducts = (updateObj) => async dispatch => {
-  console.log('Value update products before request', updateObj.value);
   const response = await axios({
     method: 'put',
     url: `${API_URL}/${updateObj.id}`,
