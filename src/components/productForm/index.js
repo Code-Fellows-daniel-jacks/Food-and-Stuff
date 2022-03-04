@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 
 import { createProducts } from '../../toolkitStore/products';
 
@@ -16,7 +17,6 @@ function ProductForm() {
   const handleClose = () => setOpen(false);
 
   const [values, setValues] = useState({});
-
   const dispatch = useDispatch();
 
   function handleChange(e) {
@@ -27,13 +27,14 @@ function ProductForm() {
   function handleSubmit(e) {
     e.preventDefault();
     values['category'] = e.target.category.value;
+    values.price = parseInt(values.price).toFixed(2);
     let rqstObj = { ...values }
     dispatch(createProducts(rqstObj, 1));
   }
 
   return (
     <>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button onClick={handleOpen}>Add Product &nbsp;<AddBoxIcon /></Button>
       <Modal
         open={open}
         onClose={handleClose}

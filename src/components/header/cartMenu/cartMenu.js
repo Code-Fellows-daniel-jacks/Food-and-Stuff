@@ -11,6 +11,8 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Badge from '@mui/material/Badge';
 
+import './cartMenu.scss';
+
 function CartMenu({ cart, items }) {
   let [anchorEl, setAnchorEl] = useState(null);
   let open = Boolean(anchorEl);
@@ -72,7 +74,7 @@ function CartMenu({ cart, items }) {
           {displayItems.map((item, idx) => {
             return (
               <MenuItem key={item + idx}>
-                <Badge badgeContent={itemCounts[idx].length}>{item}</Badge>
+                <Badge className='single-item' badgeContent={itemCounts[idx].length}>{item}</Badge>
                 <Button color="error" onClick={() => handleRemove(itemCounts[idx].pop())}>REMOVE</Button>
               </MenuItem>)
           })}

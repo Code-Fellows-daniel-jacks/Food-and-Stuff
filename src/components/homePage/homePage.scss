@@ -1,7 +1,4 @@
-$titleOne: 'Alfa Slab One', cursive;
-$titleTwo: 'Permanent Marker', cursive;
-
-header {
+.option-bar {
   display: flex;
   width: 50%;
   margin-right: 25%;
@@ -10,10 +7,7 @@ header {
   background-color: green;
   padding-right: 1rem;
   padding-left: 1rem;
-  .titleOne {
-    font-family: $titleOne;
-  }
-  .titleTwo {
-    font-family: $titleTwo;
+  button {
+    color: black;
   }
 }

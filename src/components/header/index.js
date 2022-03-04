@@ -9,7 +9,9 @@ function Header() {
 
   return (
     <header>
-      <h1>Food and Stuff</h1>
+      <div style={{ display: 'flex' }}>
+        <h1 className='titleOne'>Food&nbsp;</h1><h1>and&nbsp;</h1><h1 className='titleTwo'>Stuff</h1>
+      </div>
       <CartMenu cart={cart} items={items} />
     </header>
   )

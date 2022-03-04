@@ -4,11 +4,14 @@ import { Link } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import AssignmentIcon from '@mui/icons-material/Assignment';
 
 import { getProducts } from '../../toolkitStore/products.js';
 import { updateProducts } from '../../toolkitStore/products.js';
 import { updateCart } from '../../toolkitStore/cart.js';
 import { useEffect } from 'react';
+
+import './products.scss';
 
 function Products() {
   const dispatch = useDispatch();
@@ -34,13 +37,15 @@ function Products() {
   }, []);
 
   return (
-    <div>
+    <div className='product-container'>
       {currentProducts.map((item, idx) => {
         return (
-          <Card key={idx}>
+          <Card className='product-card' key={idx}>
             <h3 data-testid='title'>{item.name}</h3>
+            <p>Description: {item.description}</p>
             <p>In Stock: {item.inventory}</p>
-            <Link to={`products/${item.id}`}>Product</Link>
+            <p>Price: {item.price} dollars</p>
+            <Link to={`products/${item.id}`}>Product Details <AssignmentIcon /></Link>
             <Button onClick={() => handleAdd(item)} color="success" variant="contained"><AddShoppingCartIcon /></Button>
           </Card>
         )
