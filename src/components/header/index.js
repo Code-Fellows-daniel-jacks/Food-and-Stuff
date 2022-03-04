@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-
 import CartMenu from './cartMenu/cartMenu';
 
 import './header.scss';
