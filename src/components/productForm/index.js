@@ -20,12 +20,13 @@ function ProductForm() {
   const dispatch = useDispatch();
 
   function handleChange(e) {
-    e.persist();
+    // e.persist();
     setValues(values => ({ ...values, [e.target.name]: e.target.value }))
   };
 
   function handleSubmit(e) {
     e.preventDefault();
+    values['category'] = e.target.category.value;
     let rqstObj = { ...values }
     dispatch(createProducts(rqstObj, 1));
   }
@@ -41,17 +42,20 @@ function ProductForm() {
       >
         <Box className='modal-styling'>
           <form onSubmit={handleSubmit}>
+            <div>
             <label>
               Category:
-              <select onChange={handleChange}
-                name='category'
-                defaultValue={'food'}
-                required={true}
-                placeholder='Pick a Category'>
-                <option value='food'>Food</option>
-                <option value='stuff'>Stuff</option>
-              </select>
+                <div>
+                  <input type="radio" id="food" name="category" value="food" required />
+                  <label>Food</label>
+                </div>
+
+                <div>
+                  <input type="radio" id="stuff" name="category" value="stuff" required />
+                  <label>Stuff</label>
+                </div>
             </label>
+            </div>
             <label>
               Name:
               <input

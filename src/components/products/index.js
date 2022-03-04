@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
@@ -39,6 +40,7 @@ function Products() {
           <Card key={idx}>
             <h3 data-testid='title'>{item.name}</h3>
             <p>In Stock: {item.inventory}</p>
+            <Link to={`products/${item.id}`}>Product</Link>
             <Button onClick={() => handleAdd(item)} color="success" variant="contained"><AddShoppingCartIcon /></Button>
           </Card>
         )

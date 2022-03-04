@@ -1,24 +1,28 @@
-import { Provider } from 'react-redux';
+import { useSelector } from 'react-redux';
+// import { Provider } from 'react-redux';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import toolkitStore from './toolkitStore';
+// import toolkitStore from './toolkitStore';
 
-import Header from './components/header';
-import Drawer from './components/drawer';
-import ProductForm from './components/productForm';
-import Products from './components/products';
-import Footer from './components/footer';
-
-// const reduxStore = store();
+import HomePage from './components/homePage';
+import SingleProductPage from './components/singleProductPage';
 
 function App() {
+
+  const id = useSelector(state => state.products.activeProduct.id);
+  const allProducts = useSelector(state => state.products.allProducts);
+
   return (
-    <Provider store={toolkitStore}>
-      <Header />
-      <Drawer />
-      <ProductForm />
-      <Products /> 
-      <Footer />
-    </Provider>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        {allProducts.map((product, idx) => {
+          return (
+            <Route key={product + idx} path={`/products/${product.id}`} element={<SingleProductPage product={product} />} />
+          )
+        })}
+      </Routes>
+    </BrowserRouter>
   );
 }
 

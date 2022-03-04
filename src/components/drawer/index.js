@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Drawer } from '@mui/material';
 
 import { changeCategory } from '../../toolkitStore/categories.js';
+import { filteredProducts } from '../../toolkitStore/products.js';
 
 import MenuIcon from '@mui/icons-material/Menu';
 
@@ -20,6 +21,7 @@ function Left() {
 
   function handleClick(category) {
     dispatch(changeCategory(category));
+    dispatch(filteredProducts(category));
   }
 
   const anchor = 'left';
