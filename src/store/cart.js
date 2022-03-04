@@ -1,5 +1,3 @@
-import { nanoid } from 'nanoid';
-
 const initialState = {
   cart: [],
   numberOfItems: 0,
@@ -26,21 +24,5 @@ const cartReducer = (state = initialState, action) => {
       return state
   }
 }
-
-// export function addItem(item) {
-//   item.id = nanoid();
-//   let decoupled = JSON.parse(JSON.stringify(item));
-//   return {
-//     type: 'ADD_ITEM',
-//     payload: decoupled,
-//   }
-// }
-
-// export function removeItem(item) {
-//   return {
-//     type: 'REMOVE_ITEM',
-//     payload: item,
-//   }
-// }
 
 export default cartReducer;

@@ -1,18 +1,18 @@
 import axios from 'axios';
 
-class Product {
-  constructor(category, name, description, price, inventory) {
-    this.category = category;
-    this.name = name;
-    this.description = description;
-    this.price = price;
-    this.inventory = inventory;
-  }
+// class Product {
+//   constructor(category, name, description, price, inventory) {
+//     this.category = category;
+//     this.name = name;
+//     this.description = description;
+//     this.price = price;
+//     this.inventory = inventory;
+//   }
 
-  setInventory(value) {
-    this.inventory += value;
-  }
-}
+//   setInventory(value) {
+//     this.inventory += value;
+//   }
+// }
 
 const API_URL = 'http://localhost:3001/api/v1/product';
 
@@ -48,8 +48,9 @@ const productReducer = (state = initialState, action) => {
       return { ...state, allProducts: increased }
     case 'GET_PRODUCTS':
       return { ...state, allProducts: payload }
+    case 'CREATE_PRODUCTS':
+      return { ...state, allProducts: [...state.allProducts, payload] }
     case 'UPDATE_PRODUCTS':
-      console.log(payload[0]);
       let updArr = state.allProducts.map(item => {
         if (item.name === payload[0].name) {
           return payload[0]
@@ -74,6 +75,28 @@ export const getProducts = () => async (dispatch, getState) => {
   const data = response.data;
   dispatch({
     type: 'GET_PRODUCTS',
+    payload: data,
+  });
+}
+
+export const createProducts = (formData) => async (dispatch, getState) => {
+  let rqstObj = {
+    category: formData.category,
+    name: formData.name,
+    description: formData.description,
+    price: parseInt(formData.price),
+    inventory: parseInt(formData.inventory),
+  }
+
+  const response = await axios({
+    method: 'post',
+    url: API_URL,
+    data: rqstObj,
+  });
+
+  const data = response.data;
+  dispatch({
+    type: 'CREATE_PRODUCTS',
     payload: data,
   });
 }

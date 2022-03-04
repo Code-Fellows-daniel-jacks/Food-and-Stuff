@@ -1,5 +1,8 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { When } from 'react-if';
+import { updateProducts } from '../../../toolkitStore/products.js';
+import { updateCart } from '../../../toolkitStore/cart.js';
 
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
@@ -8,9 +11,25 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Badge from '@mui/material/Badge';
 
-function CartMenu({ cart, items, handleRemove }) {
+function CartMenu({ cart, items }) {
   let [anchorEl, setAnchorEl] = useState(null);
   let open = Boolean(anchorEl);
+
+  const dispatch = useDispatch();
+  const allProducts = useSelector(state => state.products.allProducts);
+  console.log('PRODUCTS HERE', allProducts);
+
+  function handleRemove(item) {
+    let value = allProducts.find(product => product.name === item.name).inventory;
+    let updateObj = {
+      name: item.name,
+      goal: 'minus',
+      value: value + 1,
+      id: item.id,
+    }
+    dispatch(updateProducts(updateObj));
+    dispatch(updateCart(updateObj));
+  }
 
   function handleClick(e) {
     setAnchorEl(e.currentTarget);
@@ -19,6 +38,8 @@ function CartMenu({ cart, items, handleRemove }) {
   function handleClose() {
     setAnchorEl(null);
   }
+
+  console.log('CART HERE', cart);
 
   let processCart = cart.reduce((prev, curr) => {
     if (!prev[curr.name]) {
