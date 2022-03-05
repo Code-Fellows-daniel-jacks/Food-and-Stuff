@@ -4,6 +4,12 @@ $titleOne: 'Alfa Slab One', cursive;
 $titleTwo: 'Permanent Marker', cursive;
 $primary: 'Ubuntu Mono', monospace;
 
+body {
+  background-image: linear-gradient(rgba(4,9,30,0.4),rgba(4,9,30,0.4)), url(./img/Food_and_Stuff.png);
+  background-size: 100vw 100vh;
+  background-repeat: no-repeat;
+}
+
 * {
   font-family: $primary;
 }

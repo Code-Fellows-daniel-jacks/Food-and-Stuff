@@ -4,14 +4,20 @@
   margin-left: 25%;
   display: grid;
   grid-template-columns: 2fr 2fr;
-  grid-template-rows: auto;
+  grid-auto-rows: 15rem;
   grid-gap: 1rem;
   background-color: green;
   padding: 1rem;
+  height: 80vh;
+  overflow-y: scroll;
   .product-card {
-    padding: 1rem;
-    h3 {
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border: solid 1px black;
+    h2 {
       text-align: center;
+      text-shadow: 1px 1px rgb(87, 87, 87);
     }
     a {
       text-decoration: none;
@@ -27,6 +33,15 @@
       svg {
         color: white;
       }
+    }
+  }
+  .no-items {
+    width: auto;
+    grid-column: 1/2;
+    grid-row: 1;
+    margin-left: 5rem;
+    img {
+      box-shadow: 3px 3px rgba(0, 0, 0, 0.342);
     }
   }
 }

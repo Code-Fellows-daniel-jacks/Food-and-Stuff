@@ -11,7 +11,6 @@ import './App.scss';
 
 function App() {
 
-  const id = useSelector(state => state.products.activeProduct.id);
   const allProducts = useSelector(state => state.products.allProducts);
 
   return (
