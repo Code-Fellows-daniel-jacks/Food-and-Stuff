@@ -7,10 +7,10 @@ import './singleProductPage.scss';
 
 
 function SingleProductPage({ product }) {
-  console.log(product.category);
+
   const fontArray = ['Ubuntu Mono, monospace', 'Alfa Slab One, cursive', 'Permanent Marker, cursive'];
-  const activeFont = product.category === 'all' ? fontArray[0] : product === 'food' ? fontArray[1] : fontArray[2];
-  console.log(activeFont);
+  const activeFont = product.category === 'food' ? fontArray[1] : fontArray[2];
+
   return (
     <>
       <Card className='single-product-card'>
