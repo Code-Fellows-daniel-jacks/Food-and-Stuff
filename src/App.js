@@ -7,9 +7,10 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import HomePage from './components/homePage';
 import SingleProductPage from './components/singleProductPage';
 
+import './App.scss';
+
 function App() {
 
-  const id = useSelector(state => state.products.activeProduct.id);
   const allProducts = useSelector(state => state.products.allProducts);
 
   return (

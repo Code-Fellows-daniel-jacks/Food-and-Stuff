@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'; 
-import { Button, Drawer } from '@mui/material';
+import { Button, Drawer, List, ListItem } from '@mui/material';
 
 import { changeCategory } from '../../toolkitStore/categories.js';
 import { filteredProducts } from '../../toolkitStore/products.js';
 
 import MenuIcon from '@mui/icons-material/Menu';
+import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
 
 function Left() {
 
@@ -22,27 +23,37 @@ function Left() {
   function handleClick(category) {
     dispatch(changeCategory(category));
     dispatch(filteredProducts(category));
+    toggleOpen(!open);
   }
 
   const anchor = 'left';
 
+  const fontArray = ['Ubuntu Mono, monospace', 'Alfa Slab One, cursive', 'Permanent Marker, cursive'];
+  const activeFont = active === 'all' ? fontArray[0] : active === 'food' ? fontArray[1] : fontArray[2];
+
   return (
     <React.Fragment key={anchor}>
-      <Button onClick={toggleDrawer}><MenuIcon /></Button>
+      <Button onClick={toggleDrawer}><MenuIcon style={{ border: '1px solid white', backgroundColor: 'black', padding: '2px', borderRadius: '5px' }} /></Button>
       <Drawer
         anchor={'left'}
         open={open}
         onClose={toggleDrawer}
       >
-        <h1>Currently shopping {active.toUpperCase()}</h1>
+        <div style={{ display: 'flex', width: '18rem', marginLeft: '2rem', textAlign: 'center' }}>
+          <h1 style={{ marginTop: '2rem' }}>Shopping&nbsp;</h1>
+          <h1 style={{ fontFamily: activeFont, marginTop: '2rem' }}>{active.toUpperCase()}</h1>
+        </div>
+        <List>
+          <h2 style={{ marginLeft: '4.3rem' }}>Categories:</h2>
         {categories.map((category, idx) => {
           return (
-            <div key={category + idx}>
-              <h4>{category}</h4>
-              <Button onClick={() => handleClick(category)}>{category}</Button>
-            </div>
+            <ListItem style={{ marginLeft: '4.3rem' }} key={category + idx}>
+              <h2 style={{ width: '3rem', fontFamily: fontArray[idx] }}>{category.toUpperCase()}</h2>
+              <Button onClick={() => handleClick(category)}><TrendingFlatIcon style={{ position: 'absolute', right: '0' }} /></Button>
+            </ListItem >
           )
         })}
+        </List>
       </Drawer>
     </React.Fragment>
   )

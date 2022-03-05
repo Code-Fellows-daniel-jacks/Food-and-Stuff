@@ -10,6 +10,9 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Badge from '@mui/material/Badge';
+import BadgeUnstyled from '@mui/base/BadgeUnstyled';
+
+import './cartMenu.scss';
 
 function CartMenu({ cart, items }) {
   let [anchorEl, setAnchorEl] = useState(null);
@@ -59,8 +62,8 @@ function CartMenu({ cart, items }) {
         aria-expanded={open}
         onClick={handleClick}
       >
-        <Badge badgeContent={items}>
-          <ShoppingCartIcon />
+        <Badge badgeContent={items} color="info" showZero>
+          <ShoppingCartIcon style={{ color: 'white' }} />
         </Badge>
       </Button>
       <Menu
@@ -72,7 +75,7 @@ function CartMenu({ cart, items }) {
           {displayItems.map((item, idx) => {
             return (
               <MenuItem key={item + idx}>
-                <Badge badgeContent={itemCounts[idx].length}>{item}</Badge>
+                <Badge className='single-item' badgeContent={itemCounts[idx].length} >{item}</Badge>
                 <Button color="error" onClick={() => handleRemove(itemCounts[idx].pop())}>REMOVE</Button>
               </MenuItem>)
           })}

@@ -1,0 +1,29 @@
+.single-product-card {
+  height: 50vh;
+  width: 50%;
+  margin: auto;
+  margin-top: 10%;
+  border: solid 3px green;
+  h1 {
+    text-align: center;
+    text-shadow: 1.3px 1.3px rgb(87, 87, 87);
+  }
+  .product-details {
+    font-size: 1.2em;
+    margin-left: 10%;
+  }
+  a {
+    color: black;
+    position: relative;
+    left: 75%;
+    top: 30%;
+    text-decoration: none;
+    font-size: 2em;
+  }
+  .category-text {
+    display: flex;
+    * {
+      margin-top: 0px;
+    }
+  }
+}
