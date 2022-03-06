@@ -82,6 +82,7 @@ function ProductForm() {
                 name='price'
                 onChange={handleChange}
                 min={0}
+                step={.01}
                 placeholder='Product Price'
                 required={true} />
             </label>

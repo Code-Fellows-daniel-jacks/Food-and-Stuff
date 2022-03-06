@@ -11,6 +11,8 @@ function SingleProductPage({ product }) {
   const fontArray = ['Ubuntu Mono, monospace', 'Alfa Slab One, cursive', 'Permanent Marker, cursive'];
   const activeFont = product.category === 'food' ? fontArray[1] : fontArray[2];
 
+  console.log('single product', product);
+
   return (
     <>
       <Card className='single-product-card'>

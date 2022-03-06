@@ -22,6 +22,8 @@ function Products() {
   const filteredProducts = useSelector(state => state.products.filteredProducts);
   const currentProducts = filteredProducts.length > 0 ? filteredProducts : allProducts;
 
+  console.log('current prod', currentProducts);
+
   function handleAdd(item) {
     let value = allProducts.find(product => product.name === item.name).inventory;
     let updateObj = {

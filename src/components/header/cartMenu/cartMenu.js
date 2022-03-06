@@ -29,6 +29,7 @@ function CartMenu({ cart, items }) {
       value: value + 1,
       id: item.id,
     }
+    console.log(updateObj.value);
     dispatch(updateProducts(updateObj));
     dispatch(updateCart(updateObj));
   }
