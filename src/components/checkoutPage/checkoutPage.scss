@@ -1,0 +1,30 @@
+.checkout-card {
+  height: 75vh;
+  width: 50%;
+  margin: auto;
+  margin-top: 8%;
+  border: solid 3px green;
+  h1 {
+    text-align: center;
+    text-shadow: 1.3px 1.3px rgb(87, 87, 87);
+  }
+  .checkout-details {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.2em;
+    margin-left: 10%;
+  }
+  a {
+    color: black;
+    position: sticky;
+    left: 75%;
+    text-decoration: none;
+    font-size: 2em;
+  }
+  // .category-text {
+  //   display: flex;
+  //   * {
+  //     margin-top: 0px;
+  //   }
+  // }
+}
