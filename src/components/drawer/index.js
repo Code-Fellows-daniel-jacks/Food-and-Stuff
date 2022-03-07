@@ -8,6 +8,7 @@ import { filteredProducts } from '../../toolkitStore/products.js';
 
 import MenuIcon from '@mui/icons-material/Menu';
 import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 function Left() {
 
@@ -54,7 +55,7 @@ function Left() {
             </ListItem >
           )
         })}
-          <ListItem><Link to='/cart'>Click Me</Link></ListItem>
+          <ListItem style={{ marginLeft: '4.3rem', }}><Button><Link style={{ textDecoration: 'none', color: 'black', fontSize: '1.2em', fontWeight: '800' }} to='/cart'>Go To Cart <ShoppingCartIcon /></Link></Button></ListItem>
         </List>
       </Drawer>
     </React.Fragment>
