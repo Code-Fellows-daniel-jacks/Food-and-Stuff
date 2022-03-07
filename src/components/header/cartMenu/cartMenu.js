@@ -79,7 +79,7 @@ function CartMenu({ cart, items }) {
                 <Button color="error" onClick={() => handleRemove(itemCounts[idx].pop())}>REMOVE</Button>
               </MenuItem>)
           })}
-          <Button><Link to='/cart'>View Cart</Link></Button>
+          <MenuItem><Button><Link style={{ textDecoration: 'none', color: 'black', fontSize: '1.2em', fontWeight: '800' }} to='/cart'>Go To Cart <ShoppingCartIcon /></Link></Button></MenuItem>
         </When>
         <When condition={displayItems.length === 0}>
           <MenuItem>No Items In Cart</MenuItem>
