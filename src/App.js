@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import HomePage from './components/homePage';
 import SingleProductPage from './components/singleProductPage';
+import CheckoutPage from './components/checkoutPage';
 
 import './App.scss';
 
@@ -22,6 +23,7 @@ function App() {
             <Route key={product + idx} path={`/products/${product.id}`} element={<SingleProductPage product={product} />} />
           )
         })}
+        <Route path='/cart' element={<CheckoutPage />} />
       </Routes>
     </BrowserRouter>
   );

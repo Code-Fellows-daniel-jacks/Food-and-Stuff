@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'; 
 import { Button, Drawer, List, ListItem } from '@mui/material';
 
@@ -53,6 +54,7 @@ function Left() {
             </ListItem >
           )
         })}
+          <ListItem><Link to='/cart'>Click Me</Link></ListItem>
         </List>
       </Drawer>
     </React.Fragment>

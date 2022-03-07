@@ -1,5 +1,6 @@
-import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { When } from 'react-if';
 import { updateProducts } from '../../../toolkitStore/products.js';
 import { updateCart } from '../../../toolkitStore/cart.js';
@@ -10,7 +11,6 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Badge from '@mui/material/Badge';
-import BadgeUnstyled from '@mui/base/BadgeUnstyled';
 
 import './cartMenu.scss';
 
@@ -79,6 +79,7 @@ function CartMenu({ cart, items }) {
                 <Button color="error" onClick={() => handleRemove(itemCounts[idx].pop())}>REMOVE</Button>
               </MenuItem>)
           })}
+          <Button><Link to='/cart'>View Cart</Link></Button>
         </When>
         <When condition={displayItems.length === 0}>
           <MenuItem>No Items In Cart</MenuItem>
